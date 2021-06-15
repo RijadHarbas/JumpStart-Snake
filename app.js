@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
         moveHead(directionModX, directionModY);
         // Cut the end of the tail
         snake.parts.shift();
+        // Did we land on an apple? If so increase the score
+        if (currentApple.x === snake.getHead().x && currentApple.y === snake.getHead().y) {
+            console.log("+1");
+        }
     }
 
     const moveHead = (directionModX, directionModY) => {
