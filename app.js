@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameAreaHeight = gameArea.height;
     let directionModX = 0;
     let directionModY = -10;
-
-
     let gameAreaContext;
     if (gameArea.getContext) {
         gameAreaContext = gameArea.getContext("2d");
@@ -24,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("keydown", event => {
-        console.log(event);
         if (event.key === "a") {
             if (directionModX !== 10) {
                 directionModX = -10;
@@ -75,6 +72,24 @@ document.addEventListener("DOMContentLoaded", () => {
         snake.parts.push(newHead);
     }
 
+    let currentApple = null;
+    const drawApple = () => {
+        gameAreaContext.fillStyle = "#FF0000";
+        if (!currentApple) {
+            currentApple = createApple();
+        }
+        gameAreaContext.fillRect(currentApple.x, currentApple.y, 10, 10);
+    }
+
+    const createApple = () => {
+        let x = Math.floor(Math.random() * gameAreaWidth - 10) + 10;
+        // Remove the single digits, e.g. 427 becomes 420
+        x = x - x % 10;
+        let y = Math.floor(Math.random() * gameAreaHeight - 10) + 10;
+        y = y - y % 10;
+        return { x: x, y: y };
+    }
+
     const isGameOver = () => {
         const head = snake.getHead();
         let isOutOfBounds = false;
@@ -98,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             previousTime = timestamp;
             clearGameArea();
             drawSnake();
+            drawApple();
             moveSnake(directionModX, directionModY);
             if (isGameOver()) {
                 return;
