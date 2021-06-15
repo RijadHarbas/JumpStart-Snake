@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameArea = document.querySelector("#game-area");
     const gameAreaWidth = gameArea.width;
     const gameAreaHeight = gameArea.height;
+    let directionModX = 10;
+    let directionModY = 0;
+
 
     let gameAreaContext;
     if (gameArea.getContext) {
@@ -33,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const moveSnake = () => {
-        moveHead();
+    const moveSnake = (directionModX, directionModY) => {
+        moveHead(directionModX, directionModY);
         // Cut the end of the tail
         snake.parts.shift();
     }
@@ -57,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             previousTime = timestamp;
             clearGameArea();
             drawSnake();
-            moveSnake();
+            moveSnake(directionModX, directionModY);
         }
         requestAnimationFrame(gameLoop);
     }
