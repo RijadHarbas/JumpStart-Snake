@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
         getTail() {
             return this.parts[0];
         },
+        appendNewHead(directionModX, directionModY) {
+            const currentHead = this.getHead();
+            const newHead = { x: 0, y: 0 };
+            newHead.x = currentHead.x + directionModX;
+            newHead.y = currentHead.y + directionModY;
+            this.parts.push(newHead);
+            // Cut the end of the tail
+            snake.parts.shift();
+        },
         appendNewTail() {
             const currentTail = this.getTail();
             const newTail = { x: 0, y: 0 };
@@ -70,9 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const moveSnake = (directionModX, directionModY) => {
-        moveHead(directionModX, directionModY);
-        // Cut the end of the tail
-        snake.parts.shift();
+        snake.appendNewHead(directionModX, directionModY);
         // Did we land on an apple? If so increase the score
         if (currentApple.x === snake.getHead().x && currentApple.y === snake.getHead().y) {
             score.innerText = parseInt(score.innerText) + 10;
@@ -80,14 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
             currentApple = null;
             snake.appendNewTail();
         }
-    }
-
-    const moveHead = (directionModX, directionModY) => {
-        const currentHead = snake.getHead();
-        const newHead = { x: 0, y: 0 };
-        newHead.x = currentHead.x + directionModX;
-        newHead.y = currentHead.y + directionModY;
-        snake.parts.push(newHead);
     }
 
     let currentApple = null;
