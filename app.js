@@ -77,12 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isGameOver = () => {
         const head = snake.getHead();
-        let isGameOver = false;
+        let isOutOfBounds = false;
+        isOutOfBounds = head.x < 0 || head.y < 0;
+        isOutOfBounds = isOutOfBounds || head.x >= gameAreaWidth || head.y >= gameAreaHeight;
 
-        isGameOver = head.x < 0 || head.y < 0;
-        isGameOver = isGameOver || head.x > gameAreaWidth || head.y > gameAreaHeight;
+        const isCollidedWith = snake.parts
+            .slice(0, -1)
+            .some(part => part.x === head.x && part.y === head.y);
 
-        return isGameOver;
+        return isOutOfBounds || isCollidedWith;
     }
 
     let previousTime = null;
