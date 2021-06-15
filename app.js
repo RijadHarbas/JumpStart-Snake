@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(gameLoop);
     }
 
+    alert("Use W A S D to control the snake. Eat the red dots to increase your score!");
     gameLoop();
 
 })
