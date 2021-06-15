@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gameAreaContext = gameArea.getContext("2d");
     }
     const score = document.querySelector("#score");
+    const status = document.querySelector("#status");
 
     let snake = {
         parts: [
@@ -133,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             drawApple();
             moveSnake(directionModX, directionModY);
             if (isGameOver()) {
+                status.innerText = `GAME OVER: Final score is ${score.innerText}`
                 return;
             }
         }
