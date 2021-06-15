@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gameArea.getContext) {
         gameAreaContext = gameArea.getContext("2d");
     }
+    const score = document.querySelector("#score");
 
     let snake = {
         parts: [
@@ -18,6 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         getHead() {
             return this.parts[this.parts.length - 1];
+        },
+        getTail() {
+            return this.parts[0];
+        },
+        appendNewTail() {
+            const currentTail = this.getTail();
+            const newTail = { x: 0, y: 0 };
+            newTail.x = currentTail.x - directionModX;
+            newTail.y = currentTail.y - directionModY;
+            this.parts.unshift(newTail);
         }
     }
 
@@ -64,7 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
         snake.parts.shift();
         // Did we land on an apple? If so increase the score
         if (currentApple.x === snake.getHead().x && currentApple.y === snake.getHead().y) {
-            console.log("+1");
+            score.innerText = parseInt(score.innerText) + 10;
+            // We ate the apple
+            currentApple = null;
+            snake.appendNewTail();
         }
     }
 
