@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameAreaWidth = gameArea.width;
     const gameAreaHeight = gameArea.height;
 
-    const horizontal
-
     let gameAreaContext;
     if (gameArea.getContext) {
         gameAreaContext = gameArea.getContext("2d");
@@ -16,7 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
             { x: 180, y: 200 },
             { x: 190, y: 200 },
             { x: 200, y: 200 }
-        ]
+        ],
+        getHead() {
+            return this.parts[this.parts.length - 1];
+        }
     }
 
     const clearGameArea = () => {
