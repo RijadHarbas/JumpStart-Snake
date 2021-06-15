@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let gameAreaContext;
     if (gameArea.getContext) {
         gameAreaContext = gameArea.getContext("2d");
+    } else {
+        alert("Canvas API not supported! Unable to play the game!");
+        console.error("Canvas API not supported! Unable to the play the game");
+        return;
     }
     const score = document.querySelector("#score");
     const status = document.querySelector("#status");
