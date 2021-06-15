@@ -100,10 +100,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const createApple = () => {
-        let x = Math.floor(Math.random() * gameAreaWidth - 10) + 10;
+        let x = Math.floor(Math.random() * (gameAreaWidth - 20)) + 10;
         // Remove the single digits, e.g. 427 becomes 420
         x = x - x % 10;
-        let y = Math.floor(Math.random() * gameAreaHeight - 10) + 10;
+        let y = Math.floor(Math.random() * (gameAreaHeight - 20)) + 10;
         y = y - y % 10;
         return { x: x, y: y };
     }
