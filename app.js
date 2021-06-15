@@ -23,6 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    document.addEventListener("keydown", event => {
+        console.log(event);
+        if (event.key === "a") {
+            if (directionModX !== 10) {
+                directionModX = -10;
+                directionModY = 0;
+            }
+        } else if (event.key === "d") {
+            if (directionModX !== -10) {
+                directionModX = 10;
+                directionModY = 0;
+            }
+        } else if (event.key === "w") {
+            if (directionModY !== 10) {
+                directionModY = -10;
+                directionModX = 0;
+            }
+        } else if (event.key === "s") {
+            if (directionModY !== -10) {
+                directionModY = 10;
+                directionModX = 0;
+            }
+        }
+    })
+
     const clearGameArea = () => {
         gameAreaContext.clearRect(0, 0, gameAreaWidth, gameAreaHeight);
     }
