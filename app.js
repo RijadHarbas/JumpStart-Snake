@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const moveSnake = (directionModX, directionModY) => {
         snake.appendNewHead(directionModX, directionModY);
         // Did we land on an apple? If so increase the score
-        if (currentApple.x === snake.getHead().x && currentApple.y === snake.getHead().y) {
+        if (currentApple && currentApple.x === snake.getHead().x && currentApple.y === snake.getHead().y) {
             score.innerText = parseInt(score.innerText) + 10;
             // We ate the apple
             currentApple = null;
@@ -99,6 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
         gameAreaContext.fillStyle = "#FF0000";
         if (!currentApple) {
             currentApple = createApple();
+        }
+        const isInvalidPosition = snake.parts
+            .some(part => part.x === currentApple.x && part.y === currentApple.y);
+
+        if (isInvalidPosition) {
+            currentApple = null;
+            return;
         }
         gameAreaContext.fillRect(currentApple.x, currentApple.y, 10, 10);
     }
