@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const status = document.querySelector("#status");
     status.classList.add("hide");
 
+    const difficultySelector = document.querySelector(".difficulty-selector");
+    let difficulty = 100;
+    difficultySelector.addEventListener("change", event => {
+        difficulty = event.target.value;
+    })
+
     let snake = {
         parts: [
             { x: 170, y: 200 },
@@ -138,8 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!previousTime) {
             previousTime = timestamp;
         }
-        // Render the snake roughly every 100 miliseconds
-        if (timestamp - previousTime >= 100) {
+        // How fast the snake is rendered depends on the difficulty, Higher means easier
+        if (timestamp - previousTime >= difficulty) {
             previousTime = timestamp;
             clearGameArea();
             drawSnake();

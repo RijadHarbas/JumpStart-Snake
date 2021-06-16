@@ -20,3 +20,7 @@ main {
 .hide {
     visibility: hidden;
 }
+
+.difficulty-selector {
+    text-align: center;
+}
