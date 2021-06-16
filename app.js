@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const score = document.querySelector("#score");
     const status = document.querySelector("#status");
+    status.classList.add("hide");
 
     let snake = {
         parts: [
@@ -145,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
             drawApple();
             moveSnake(directionModX, directionModY);
             if (isGameOver()) {
-                status.innerText = `GAME OVER: Final score is ${score.innerText}`
+                status.classList.remove("hide");
                 return;
             }
         }
